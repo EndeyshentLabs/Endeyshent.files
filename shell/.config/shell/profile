@@ -1,0 +1,35 @@
+#!/bin/bash
+# set -o vi
+export TERMINAL="st"
+export EDITOR="nvim"
+export VISUAL=$EDITOR
+export BROWSER="firefox"
+export PAGER="less"
+export DENO_INSTALL=$HOME/.deno
+
+export MPD_HOST="127.0.0.1"
+export MPD_PORT="1121"
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT=MToolkit
+
+export USERPROFILE=$HOME/.local/state/1000
+
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_RUNTIME_DIR=$USERPROFILE
+export XAUTHORITY=/tmp/Xauthority
+
+export ZDOTDIR=$HOME
+
+. ~/.path
+if which luarocks > /dev/null; then
+    eval $(luarocks path --bin)
+fi
+
+# Starting X
+# if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+#   exec startx
+# fi

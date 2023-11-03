@@ -1,0 +1,20 @@
+#!/bin/bash
+
+[ -z "$1" ] && echo "ERROR" && exit 0
+
+bspc subscribe desktop_focus node_transfer | while read -r event; do
+    workspaces="$(printf "[" && echo -n `bspc query -D -d .local --names` | sed 's/ /,/g' && echo "]")"
+    occupied_workspaces="$(echo `bspc query -D -d .occupied --names`)"
+    current_workspace=$(bspc query -D -d .focused --names)
+
+    case "$1" in
+        "workspaces") echo "$workspaces"
+        ;;
+        "occupied") echo "$occupied_workspaces"
+        ;;
+        "current") echo "$current_workspace"
+        ;;
+        *) echo "Unreachable" && exit 0
+        ;;
+    esac
+done

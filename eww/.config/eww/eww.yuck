@@ -1,0 +1,83 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+    (workspaces)
+    (window_w)
+    (sidestuff)
+  )
+)
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric :label " " :value volume :onchange "amixer -D pipewire sset Master {}%")
+    (metric :label "󰍛 " :value {EWW_RAM.used_mem_perc} :onchange "")
+    (box :class "date" date)
+    (box :class "time" time)
+  )
+)
+
+;; Hypr
+;; (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+;; (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+;; bspwm
+(deflisten workspaces :initial "[1,2,3,4,5]" "bash ~/.config/eww/scripts/get-workspaces-bspwm workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-workspaces-bspwm current")
+(deflisten occupied_workspaces :initial "1" "bash ~/.config/eww/scripts/get-workspaces-bspwm occupied")
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace-bspwm {}" :class "workspaces"
+    (box :space-evenly true :halign "start"
+      (for workspace in workspaces
+        (button :class {current_workspace == workspace ? "current" : ""} :onclick "bspc desktop -f ${workspace}" (label :text "${workspace}"))
+      )
+    )
+  )
+)
+
+;; (defpoll window :interval "1ms" :initial "waiting..." "bash ~/.config/eww/scripts/get-window-title-i3")
+;; (deflisten window :initial "waiting..." "bash ~/.config/eww/scripts/get-window-title")
+(deflisten window :initial "..." "bash ~/.config/eww/scripts/get-window-title-bspwm") ;; bspwm
+(defwidget window_w []
+  (box :class "title" :halign "center" :space-evenly false
+    (label :text "${window}")
+  )
+)
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange
+    )
+  )
+)
+
+(defpoll volume :interval "1s" :initial "1" "bash ~/.config/eww/scripts/getvol")
+
+(defpoll time :interval "10s"
+  "date '+%H:%M'"
+)
+
+(defpoll date :interval "1m"
+  "date '+%b %d, %Y'"
+)
+
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :window-type "dock"
+  :wm-ignore false
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "30px"
+                      :anchor "top center"
+            )
+  :reserve (struts :distance "30px" :side "top")
+  (bar)
+)
+
+;; vim:set ts=2 sw=2 commentstring=;;%s:

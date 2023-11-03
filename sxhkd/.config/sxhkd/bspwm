@@ -1,0 +1,76 @@
+super+Escape
+	pkill -USR1 -x sxhkd
+
+Print
+	maim --select | tee ~/Pictures/Screenshots/$(date +%s).png | xclip -sel c -t image/png
+
+alt+Print
+	maim --window $(xdotool getactivewindow)| tee ~/Pictures/Screenshots/$(date +%s).png | xclip -sel c -t image/png
+
+super+Print
+	maim | tee ~/Pictures/Screenshots/$(date +%s).png | xclip -sel c -t image/png
+
+super+ctrl+Print
+	flameshot gui
+
+XF86Audio{RaiseVolume,LowerVolume}
+	amixer -D pipewire sset Master playback 2%{+,-}
+
+XF86AudioMute
+	amixer -D pipewire sset Master playback toggle; notify-send "Mute toggled!"
+
+XF86Audio{Prev,Next,Play,Stop}
+	mpc {prev,next,toggle,stop}
+
+XF86MonBrightness{Up,Down}
+	brightnessctl s {+2%,2%-}
+
+super+ctrl+b
+	boomer
+
+super+ctrl+c
+	dm-confedit
+
+super+ctrl+d
+	dm-hub
+
+super+Return
+	st
+
+super+p
+	dmenu_run
+
+super+shift+{q,o}
+	bspc {quit,wm -r}
+
+super+{_,shift + }c
+	bspc node -{c,k}
+
+super+shift+r
+	bspc node -t \~floating
+
+super+r
+	bspc desktop -l next
+
+super+f
+	bspc node -s last.window
+
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+super + ctrl + space
+	bspc node -p cancel
+
+super + x
+	betterlockscreen -l dimblur
+
+# vim:set noet ts=4 sw=4 ft=conf:

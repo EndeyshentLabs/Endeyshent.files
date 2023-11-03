@@ -1,0 +1,133 @@
+Xcursor.size: 20
+
+Xft.dpi: 93
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+
+! URxvt
+URxvt*imLocale: en_US.UTF-8
+URxvt*buffered: true
+URxvt.intensityStyles: false
+! Make it transparent
+URxvt*depth: 32
+URxvt.background: [90]#101010
+
+URxvt.vt100.bellIsUrgent:      true
+URxvt.vt100.alternateScroll:   true
+URxvt.vt100.selectToClipboard: true
+
+URxvt.scrollBar: false
+URxvt.perl-ext-common: default,selection-to-clipboard,matcher,resize-font,clipboard
+! Clipboard
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+! URLs open/yank support
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+URxvt.keysym.M-u: perl:matcher:select
+
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.secondaryWheel: 1
+URxvt*urgentOnBell: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt.font: xft:VictorMono Nerd Font:size=12, \
+            xft:VictorMono Nerd Font Mono:size=12, \
+            xft:Symbols Nerd Font:size=12, \
+            xft:DejaVuSansMono Nerd Font:size=12, \
+            xft:FiraCode Nerd Font:size=12, \
+            xft:DejaVuSansMono Nerd Font Mono:size=12, \
+            xft:FiraCode Nerd Font Mono:size=12, \
+            xft:Symbols Nerd Font Mono:size=12
+URxvt.imFont: xft:VictorMono Nerd Font:italic:size=12, \
+            xft:VictorMono Nerd Font Mono:italic:size=12, \
+            xft:Symbols Nerd Font:italic:size=12, \
+            xft:DejaVuSansMono Nerd Font:italic:size=12, \
+            xft:FiraCode Nerd Font:italic:size=12, \
+            xft:DejaVuSansMono Nerd Font Mono:italic:size=12, \
+            xft:FiraCode Nerd Font Mono:italic:size=12, \
+            xft:Symbols Nerd Font Mono:italic:size=12
+URxvt.boldFont: xft:VictorMono Nerd Font:bold:size=12, \
+            xft:VictorMono Nerd Font Mono:bold:size=12, \
+            xft:Symbols Nerd Font:bold:size=12, \
+            xft:DejaVuSansMono Nerd Font:bold:size=12, \
+            xft:FiraCode Nerd Font:bold:size=12, \
+            xft:DejaVuSansMono Nerd Font Mono:bold:size=12, \
+            xft:FiraCode Nerd Font Mono:bold:size=12, \
+            xft:Symbols Nerd Font Mono:bold:size=12
+URxvt.italicFont: xft:VictorMono Nerd Font:italic:size=12, \
+            xft:VictorMono Nerd Font Mono:italic:size=12, \
+            xft:Symbols Nerd Font:italic:size=12, \
+            xft:DejaVuSansMono Nerd Font:italic:size=12, \
+            xft:FiraCode Nerd Font:italic:size=12, \
+            xft:DejaVuSansMono Nerd Font Mono:italic:size=12, \
+            xft:FiraCode Nerd Font Mono:italic:size=12, \
+            xft:Symbols Nerd Font Mono:italic:size=12
+URxvt.boldItalicFont: xft:VictorMono Nerd Font:bold italic:size=12, \
+            xft:VictorMono Nerd Font Mono:bold italic:size=12, \
+            xft:Symbols Nerd Font:bold italic:size=12, \
+            xft:DejaVuSansMono Nerd Font:bold italic:size=12, \
+            xft:FiraCode Nerd Font:bold italic:size=12, \
+            xft:DejaVuSansMono Nerd Font Mono:bold italic:size=12, \
+            xft:FiraCode Nerd Font Mono:bold italic:size=12, \
+            xft:Symbols Nerd Font Mono:bold italic:size=12
+URxvt.letterSpace : 1
+URxvt.lineSpace: 0
+! rxvt-unicode-256color || rxvt
+URxvt*termName: rxvt-unicode-256color
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.internalBorder: 15
+
+URxvt.geometry: 400x400
+
+! Xterm
+XTerm*renderFont: true
+XTerm*faceName: VictorMono Nerd Font:size=12
+XTerm*utf8: 2
+XTerm*locale: true
+XTerm*loginshell: true
+XTerm*termName: xterm-256color
+
+! Sxiv
+Sxiv.font: VictorMono Nerd Font:size=12
+
+! Other
+*.foreground:     #efefef
+*.background:     #101010
+*.cursorColor:    #efefef
+*.highlightColor: #ababab
+
+! Black colours
+*.color0:         #101010
+*.color8:         #202020
+! Red colours
+*.color1:         #ef1010
+*.color9:         #ff2020
+! Yellow colours
+*.color2:         #efef10
+*.color10:        #ffff20
+! Green colours
+*.color3:         #10ef10
+*.color11:        #20ff20
+! Blue colours
+*.color4:         #1010ef
+*.color12:        #2020ff
+! Magenta (pink, !green) colours
+*.color5:         #ef10ef
+*.color13:        #ff20ef
+! Cyan (blue + green)
+*.color6:         #10efef
+*.color14:        #20ffff
+! White colours
+*.color7:         #efefef
+*.color15:        #ffffff
