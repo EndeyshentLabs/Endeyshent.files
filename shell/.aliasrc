@@ -1,0 +1,5 @@
+alias clean_mail='dd if=/dev/null of=/var/mail/wolfo'
+function exsc {
+    exsi -t nasm-linux-x86_64 $1 && `echo "./$1" | sed 's/\.xes$//g'`
+}
+# vim:ft=bash:
