@@ -16,10 +16,11 @@ return {
     end,
   },
   {
-    "neovim/nvim-lspconfig",
-    opts = { autoformat = false },
+    "echasnovski/mini.align",
+    config = function()
+      require("mini.align").setup()
+    end,
   },
-  { "echasnovski/mini.align" },
   -- { "tpope/vim-commentary" },
   {
     dir = "~/Coding/Langdev/splic/splic.vim/",
