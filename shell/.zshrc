@@ -8,6 +8,7 @@ plugins=(git git-extras zsh-syntax-highlighting zsh-autosuggestions zsh-completi
 source $ZSH/oh-my-zsh.sh
 
 fpath=($HOME/.zfunc/ $fpath)
+autoload -U compinit && compinit
 # fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 . ~/.path
