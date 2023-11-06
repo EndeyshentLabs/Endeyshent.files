@@ -35,6 +35,6 @@ super+ctrl+d
 	dm-hub
 
 super+x
-	betterlockscreen -l dimblur
+	betterlockscreen -l blur
 
 # vim:set noet ts=4 sw=4 ft=conf:
