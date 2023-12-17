@@ -38,7 +38,7 @@ super+ctrl+w
 	wacom.sh
 
 super+Return
-	wezterm-gui start
+	alacritty
 
 super+{_,shift +}p
 	rofi -show {run,drun}
