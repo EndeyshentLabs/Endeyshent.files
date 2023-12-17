@@ -8,7 +8,12 @@ if wezterm.config_builder then
 end
 
 config.colors = colors
-config.font = wezterm.font "VictorMono Nerd Font"
+config.font = wezterm.font_with_fallback {
+    "VictorMono Nerd Font",
+    "VictorMono Nerd Font Mono",
+    "Symbols Nerd Font",
+}
+config.font_size = 11
 config.enable_tab_bar = false
 config.window_background_opacity = 0.90
 config.text_background_opacity = 1
