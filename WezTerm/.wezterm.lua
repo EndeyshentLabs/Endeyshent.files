@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local colors = require('lua/rose-pine').colors()
 
 local config = {}
 
@@ -6,7 +7,7 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.color_scheme = "Pop (base16)"
+config.colors = colors
 config.font = wezterm.font "VictorMono Nerd Font"
 config.enable_tab_bar = false
 config.window_background_opacity = 0.90
