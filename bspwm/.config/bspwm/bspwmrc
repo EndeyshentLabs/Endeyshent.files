@@ -30,5 +30,6 @@ xsetroot -cursor_name left_ptr
 
 bspc rule -a Firefox desktop=^2
 
-pgrep eww > /dev/null || eww daemon &
-eww open bar &
+# pgrep eww > /dev/null || eww daemon &
+# eww open bar &
+polybar -r &
