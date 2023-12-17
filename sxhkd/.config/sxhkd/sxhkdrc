@@ -37,4 +37,7 @@ super+ctrl+d
 super+x
 	betterlockscreen -l blur
 
+super+ctrl+w
+	wacom.sh
+
 # vim:set noet ts=4 sw=4 ft=conf:
