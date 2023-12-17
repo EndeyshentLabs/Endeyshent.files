@@ -34,14 +34,20 @@ super+ctrl+c
 super+ctrl+d
 	dm-hub
 
+super+ctrl+w
+	wacom.sh
+
 super+Return
-	st
+	wezterm-gui start
 
-super+p
-	dmenu_run
+super+{_,shift +}p
+	rofi -show {run,drun}
 
-super+shift+{q,o}
-	bspc {quit,wm -r}
+super+shift+q
+	bspc quit
+
+super+shift+o
+	bspc wm -r
 
 super+{_,shift + }c
 	bspc node -{c,k}
@@ -49,8 +55,14 @@ super+{_,shift + }c
 super+shift+r
 	bspc node -t \~floating
 
+super+shift+f
+	bspc node -t \~fullscreen
+
 super+r
-	bspc desktop -l next
+	bspc desktop -l monocle
+
+super+w
+	bspc desktop -l tiled
 
 super+f
 	bspc node -s last.window
@@ -58,16 +70,22 @@ super+f
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-super + {grave,Tab}
-	bspc {node,desktop} -f last
+super + ctrl + Tab
+	bspc desktop -f last
+
+super + {_,shift +}Tab
+	bspc node -f {next,prev}.local.!hidden.window
 
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
+super + {_,shift +}{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
-super + ctrl + space
+super + ctrl + semicolon
 	bspc node -p cancel
 
 super + x
