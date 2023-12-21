@@ -1,13 +1,17 @@
 return {
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git",
-    keys = {
-      {
-        "<leader>gf",
-        "<cmd>Git<cr>",
-        desc = "Open vim-fugitive",
-      },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {},
+        keys = {
+            { "<leader>gph", "<cmd>Gitsigns preview_hunk<CR>", desc = "Preview hunk" },
+            { "<leader>gbl", "<cmd>Gitsigns blame_line<CR>",   desc = "Blame line" },
+        }
     },
-  },
+    {
+        "tpope/vim-fugitive",
+        cmd = { "G", "Git" },
+        keys = {
+            { "<leader>gf", "<cmd>Git<CR>", desc = "Open git fugitive" }
+        }
+    },
 }
