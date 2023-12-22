@@ -2,6 +2,7 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         opts = {},
+        lazy = false,
         keys = {
             { "<leader>gph", "<cmd>Gitsigns preview_hunk<CR>", desc = "Preview hunk" },
             { "<leader>gbl", "<cmd>Gitsigns blame_line<CR>",   desc = "Blame line" },
