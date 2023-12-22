@@ -24,6 +24,7 @@ set.tabstop = 4
 set.softtabstop = 4
 
 set.termguicolors = true
+set.background = "dark"
 
 set.showmatch = true
 set.incsearch = true
@@ -46,7 +47,7 @@ set.updatetime = 50
 
 set.clipboard = "unnamedplus"
 
-vim.cmd [[filetype indent plugin on]]
+vim.cmd([[filetype indent plugin on]])
 
 g.mapleader = " "
 g.maplocalleader = " "
