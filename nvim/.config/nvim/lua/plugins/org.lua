@@ -1,12 +1,5 @@
 return {
     {
-        "goolord/alpha-nvim",
-        event = "VimEnter",
-        config = function()
-            require("alpha").setup(require("alpha.themes.dashboard").config)
-        end
-    },
-    {
         "nvim-neorg/neorg",
         ft = "norg",
         cmd = { "Neorg" },
