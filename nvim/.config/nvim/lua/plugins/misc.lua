@@ -9,6 +9,6 @@ return {
             require("mini.cursorword").setup()
             require("mini.surround").setup()
             require("mini.move").setup()
-        end
+        end,
     },
 }

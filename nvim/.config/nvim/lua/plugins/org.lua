@@ -16,10 +16,10 @@ return {
                     config = {
                         workspaces = {
                             default = "~/org",
-                        }
-                    }
+                        },
+                    },
                 },
-            }
-        }
+            },
+        },
     },
 }
