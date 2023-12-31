@@ -118,4 +118,9 @@ return {
             { "<leader>bDl", "<cmd>BufferLineCloseRight<CR>", desc = "Delete buffers on the right" },
         },
     },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {},
+    },
 }
