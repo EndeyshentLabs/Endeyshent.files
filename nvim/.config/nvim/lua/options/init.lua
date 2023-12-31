@@ -25,6 +25,9 @@ set.softtabstop = 4
 
 set.termguicolors = true
 set.background = "dark"
+g.guifont = "VictorMono Nerd Font"
+g.guifontsize = 12
+AdjustFontSize(0)
 
 set.showmatch = true
 set.incsearch = true
