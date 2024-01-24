@@ -7,6 +7,7 @@ set tgc
 set nowritebackup
 set noswapfile
 set nobackup
+set nowrap
 set updatetime=300
 set wildmenu
 set encoding=utf-8
@@ -40,6 +41,12 @@ let g:netrw_altv=v:true
 let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin("~/.vim/plugged")
 if hostname() == 'endeyshent-320'
