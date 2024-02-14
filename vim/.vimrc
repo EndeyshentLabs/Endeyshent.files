@@ -9,6 +9,8 @@ set noswapfile
 set nobackup
 set nowrap
 set updatetime=300
+set timeoutlen=1000
+set ttimeoutlen=5
 set wildmenu
 set encoding=utf-8
 set wildmode=longest:full,full
@@ -19,7 +21,7 @@ set splitbelow
 set ts=4
 set sw=4
 set et
-" set clipboard=unnamedplus    " Change?
+set clipboard=unnamedplus
 set smarttab
 set smartcase
 set ignorecase
@@ -31,6 +33,8 @@ set guifont=VictorMono\ Nerd\ Font\ 12
 set scrolloff=7
 set showcmd
 set background=dark
+set list
+set listchars=tab:>\ 
 syntax on
 filetype indent plugin on
 let g:mapleader=" "
@@ -49,57 +53,54 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin("~/.vim/plugged")
-if hostname() == 'endeyshent-320'
-    Plug '~/software/Intercept/editor/int'
-endif
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'EndeyshentLabs/vim-airline-256noir'
-Plug 'andreasvc/vim-256noir'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'dense-analysis/ale'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'rhysd/vim-lsp-ale'
-Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-dispatch'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'andreypopp/asyncomplete-ale.vim'
-Plug 'vimsence/vimsence'
-Plug 'editorconfig/editorconfig-vim'
+    if hostname() == 'endeyshent-320'
+        Plug '~/software/Intercept/editor/int'
+    endif
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'EndeyshentLabs/vim-airline-256noir'
+    Plug 'andreasvc/vim-256noir'
+    Plug 'rafi/awesome-vim-colorschemes'
+
+    Plug 'prabirshrestha/async.vim'
+    Plug 'dense-analysis/ale'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'rhysd/vim-lsp-ale'
+    Plug 'piec/vim-lsp-clangd'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+    Plug 'jremmen/vim-ripgrep'
+
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-dispatch'
+
+    Plug 'jiangmiao/auto-pairs'
+
+    Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
-nnoremap <silent> gd <plug>(lsp-definition)
-nnoremap <silent> gs <plug>(lsp-document-symbol-search)
-nnoremap <silent> gS <plug>(lsp-workspace-symbol-search)
-nnoremap <silent> gr <plug>(lsp-references)
-nnoremap <silent> gi <plug>(lsp-implementation)
-nnoremap <silent> gt <plug>(lsp-type-definition)
-nnoremap <silent> <leader>rn <plug>(lsp-rename)
-nnoremap <silent> [g <plug>(lsp-previous-diagnostic)
-nnoremap <silent> ]g <plug>(lsp-next-diagnostic)
-nnoremap <silent> K <plug>(lsp-hover)
-nnoremap <silent> <expr><c-f> lsp#scroll(+4)
-nnoremap <silent> <expr><c-b> lsp#scroll(-4)
-
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+source ~/.vim_lsp
 
 nnoremap <silent> <Leader>h :nohl<CR>
 nnoremap <silent> <Leader>, :nohl<CR>
+nnoremap <silent> <Esc><Esc> :nohl<CR>
+nnoremap <silent> <S-l> <Cmd>tabn<CR>
+nnoremap <silent> <S-h> <Cmd>tabp<CR>
 
 set t_Co=256
-colo 256_noir
+colorscheme gruvbox
 let g:airline#extensions#ale#enabled = 1
-let g:ale_completion_enabled=1
+let g:ale_completion_enabled=0
 
-highlight SignColumn cterm=NONE ctermfg=245 ctermbg=16 gui=NONE guifg=#8a8a8a guibg=#000000
-highlight CursorLineNr ctermfg=196 ctermbg=16 guifg=#ff0000 guibg=#000000
-highlight LineNr ctermfg=255 ctermbg=16 guifg=#eeeeee guibg=#000000
-highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
-autocmd InsertEnter * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=234 guifg=NONE guibg=#1c1c1c
-autocmd InsertLeave * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+if colors_name == '256_noir'
+    highlight SignColumn cterm=NONE ctermfg=245 ctermbg=16 gui=NONE guifg=#8a8a8a guibg=#000000
+    highlight CursorLineNr ctermfg=196 ctermbg=16 guifg=#ff0000 guibg=#000000
+    highlight LineNr ctermfg=255 ctermbg=16 guifg=#eeeeee guibg=#000000
+    highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+    autocmd InsertEnter * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=234 guifg=NONE guibg=#1c1c1c
+    autocmd InsertLeave * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+endif
