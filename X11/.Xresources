@@ -101,12 +101,6 @@ XTerm*termName: xterm-256color
 ! Sxiv
 Sxiv.font: VictorMono Nerd Font:size=12
 
-! Other
-*.foreground:     #efefef
-*.background:     #101010
-*.cursorColor:    #efefef
-*.highlightColor: #ababab
-
 ! Black colours
 *.color0:         #101010
 *.color8:         #202020
@@ -131,3 +125,9 @@ Sxiv.font: VictorMono Nerd Font:size=12
 ! White colours
 *.color7:         #efefef
 *.color15:        #ffffff
+
+! Other
+*.foreground:     #efefef
+*.background:     #101010
+*.cursorColor:    #efefef
+*.highlightColor: #ababab
