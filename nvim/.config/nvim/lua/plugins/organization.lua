@@ -2,8 +2,8 @@ return {
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
+    tag = "v7.0.0",
     dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = "Neorg",
     config = function()
       require("neorg").setup({
         load = {
@@ -12,8 +12,9 @@ return {
           ["core.dirman"] = {
             config = {
               workspaces = {
-                default = "~/org/",
+                default = "~/org",
               },
+              default_workspace = "default",
             },
           },
         },
