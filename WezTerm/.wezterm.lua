@@ -7,7 +7,8 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.colors = colors
+-- config.colors = colors
+config.color_scheme = "Pop (base16)"
 config.font = wezterm.font_with_fallback {
     "VictorMono Nerd Font",
     "VictorMono Nerd Font Mono",
