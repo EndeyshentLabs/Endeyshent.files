@@ -3,13 +3,14 @@
 local opt = vim.opt
 local g = vim.g
 
+opt.foldenable = true
 g.autoformat = false
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.title = true
 opt.colorcolumn = "120"
 opt.exrc = true -- unsafe
-g.defaultguifontsize = 13
+g.defaultguifontsize = 12
 g.guifontsize = g.defaultguifontsize
 g.guifont = "VictorMono Nerd Font"
 opt.guifont = g.guifont .. ":h" .. g.guifontsize
