@@ -7,7 +7,9 @@ Also check out my [Suckless builds(Sourcehut)](https://git.sr.ht/~endeyshentlabs
 ## Installing
 
 ```console
-$ git clone https://github.com/EndeyshentLabs/Endeyshent.files .dots
+$ git clone https://git.sr.ht/~endeyshentlabs/dotfiles .dots
 $ cd .dots
 $ ./stow.sh
 ```
+
+Then you'll probably want to compile suckless programs
