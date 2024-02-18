@@ -77,6 +77,7 @@ call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-dispatch'
+    Plug 'tpope/vim-fugitive'
 
     Plug 'jiangmiao/auto-pairs'
 
@@ -90,6 +91,7 @@ nnoremap <silent> <Leader>, :nohl<CR>
 nnoremap <silent> <Esc><Esc> :nohl<CR>
 nnoremap <silent> <S-l> <Cmd>tabn<CR>
 nnoremap <silent> <S-h> <Cmd>tabp<CR>
+nnoremap <silent> <leader>g <Cmd>G<CR>
 
 set t_Co=256
 colorscheme gruvbox
