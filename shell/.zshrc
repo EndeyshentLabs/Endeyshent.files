@@ -17,3 +17,4 @@ autoload -U compinit && compinit
 
 # alias luamake=/home/wolfo/software/luamake/luamake
 # fpath+=${ZDOTDIR:-~}/.zsh_functions
+eval "$(zoxide init --cmd cd zsh)"
