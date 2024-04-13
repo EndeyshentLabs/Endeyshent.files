@@ -26,4 +26,6 @@ config.window_padding = {
     bottom = "15px",
 }
 
+config.term = "wezterm"
+
 return config
