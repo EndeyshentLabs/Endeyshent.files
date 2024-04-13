@@ -1,0 +1,44 @@
+* {
+    all: unset;
+}
+
+window {
+    background: black;
+    color: white;
+
+    font-family: "VictorMono Nerd Font";
+    font-size: 12pt;
+
+    & > * {
+        margin: 3px;
+    }
+}
+
+.segment-top {
+    margin-top: 10px;
+}
+
+.segment-bottom {
+    margin-bottom: 10px;
+}
+
+.volume {
+    padding: 0;
+
+    slider {
+        all: unset;
+    }
+
+    scale trough highlight {
+        all: unset;
+        background-color: #8ec07c;
+        border-radius: 5px;
+    }
+
+    scale trough {
+        all: unset;
+        background-color: #202020;
+        min-width: 4px;
+        min-height: 100px;
+    }
+}

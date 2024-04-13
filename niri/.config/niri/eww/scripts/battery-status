@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+STATUS="`cat /sys/class/power_supply/BAT0/status`"
+
+if [ "$STATUS" = "Discharging" ]; then
+    printf "-"
+elif [ "$STATUS" = "Charging" ]; then
+    printf "+"
+fi
+
+# vim:set ft=bash:

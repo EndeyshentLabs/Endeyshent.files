@@ -1,0 +1,92 @@
+(defwidget widgets []
+    (centerbox :orientation "v"
+        (box :class "segment-top" :valign "start"
+            (time)
+        )
+        (box :class "segment-center" :valign "center"
+            (date)
+        )
+        (box :class "segment-bottom" :valign "end"
+            (bottom)
+        )
+    )
+)
+
+(defwidget bottom []
+    (box :orientation "v" :valign "end" :space-evenly true
+        (volume)
+        (battery)
+    )
+)
+
+;; TIME
+
+(defpoll time-hour :interval "1s" "date +%H")
+(defpoll time-minute :interval "1s" "date +%M")
+(defpoll time-secs :interval "1s" "date +%S")
+
+(defwidget time []
+    (box :orientation "v" :halign "center" :class "time"
+        time-hour
+        time-minute
+        time-secs
+    )
+)
+
+;; DATE
+
+(defpoll day-name :interval "10m" "date +%a")
+(defpoll day :interval "10m" "date +%d")
+(defpoll month :interval "1h" "date +%m")
+(defpoll year :interval "1h" "date +%y")
+
+(defwidget date []
+    (box :orientation "v" :halign "center"
+        day-name
+        day
+        month
+        year
+    )
+)
+
+;; VOLUME
+
+(deflisten volume :initial "0" "./scripts/get-volume")
+
+(defwidget volume []
+    (box :orientation "v" :halign "center" :class "volume" :vexpand false :valign "fill" :space-evenly false
+        (scale
+            :orientation "v"
+            :min 0
+            :max 100
+            :onchange "pactl set-sink-volume 0 \"$(echo {} | sed 's/\\..*//g')%\""
+            :value volume
+            :flipped true
+        )
+        (eventbox
+            :onscroll "if [ '{}' = 'up' ]; then pamixer -i 5; else pamixer -d 5; fi"
+            :vexpand true
+            :valign "fill"
+            (button :onclick "pavucontrol &" "${volume}%")
+        )
+    )
+)
+
+;; BATTERY
+
+(defpoll battery :interval "5m" "cat /sys/class/power_supply/BAT0/capacity")
+(defpoll battery-status :interval "5m" "bash ./scripts/battery-status")
+
+(defwidget battery []
+    (box :orientation "v" :halign "center"
+        "${battery}%${battery-status}"
+    )
+)
+
+(defwindow bar
+    :monitor 0
+    :geometry (geometry :x 0 :y 0 :width "50px" :height "100%" :anchor "left center")
+    :stacking "fg"
+    :exclusive true
+    (widgets)
+)
