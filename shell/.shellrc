@@ -1,4 +1,4 @@
-if [[ "$TERM" == "alacritty" || "$TERM_PROGRAM" == "__WezTerm__" ]]; then
-    cat ~/.cache/wal/sequences
+if [[ "$TERM" == "alacritty" || "$TERM_PROGRAM" == "__wezterm__" ]]; then
+    wal -Rqe
 fi
 # vim:set ft=zsh:
