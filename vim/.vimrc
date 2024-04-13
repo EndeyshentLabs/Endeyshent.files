@@ -1,4 +1,5 @@
 set nocp
+set hidden
 set nu
 set rnu
 set ru
@@ -61,8 +62,11 @@ call plug#begin("~/.vim/plugged")
     Plug 'EndeyshentLabs/vim-airline-256noir'
     Plug 'andreasvc/vim-256noir'
     Plug 'rafi/awesome-vim-colorschemes'
+    Plug 'ryanoasis/vim-devicons'
 
     Plug 'prabirshrestha/async.vim'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
     Plug 'dense-analysis/ale'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
@@ -70,14 +74,19 @@ call plug#begin("~/.vim/plugged")
     Plug 'piec/vim-lsp-clangd'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'cdelledonne/vim-cmake'
 
     Plug 'jremmen/vim-ripgrep'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'vim-ctrlspace/vim-ctrlspace'
 
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-dispatch'
+
     Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
 
     Plug 'jiangmiao/auto-pairs'
 
@@ -94,8 +103,9 @@ nnoremap <silent> <S-h> <Cmd>tabp<CR>
 nnoremap <silent> <leader>g <Cmd>G<CR>
 
 set t_Co=256
-colorscheme gruvbox
+colorscheme 256_noir
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 let g:ale_completion_enabled=0
 
 if colors_name == '256_noir'
