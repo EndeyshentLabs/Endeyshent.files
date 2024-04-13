@@ -14,7 +14,7 @@ config.font = wezterm.font_with_fallback {
     "VictorMono Nerd Font Mono",
     "Symbols Nerd Font",
 }
-config.font_size = 11
+config.font_size = 12
 config.enable_tab_bar = false
 config.window_background_opacity = 0.90
 config.text_background_opacity = 1
