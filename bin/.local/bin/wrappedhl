@@ -1,0 +1,6 @@
+#!/bin/sh
+cd ~
+export $(dbus-launch)
+dbus-run-session pipewire &
+pipewire-pulse &
+exec Hyprland

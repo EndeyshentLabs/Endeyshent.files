@@ -29,7 +29,12 @@ if which luarocks > /dev/null; then
     eval $(luarocks path --bin)
 fi
 
-# Starting X
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    exec startx
+# # Starting X
+# if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+#     exec startx
+# fi
+
+# Starting Hyprland
+if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+    wrappedhl
 fi
