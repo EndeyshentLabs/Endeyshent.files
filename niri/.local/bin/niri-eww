@@ -1,0 +1,6 @@
+#!/bin/sh
+
+CONFIG_PATH="$HOME/.config/niri/eww"
+
+eww -c "$CONFIG_PATH" daemon
+eww -c "$CONFIG_PATH" open bar
