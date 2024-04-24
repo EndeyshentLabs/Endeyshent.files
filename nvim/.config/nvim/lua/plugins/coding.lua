@@ -23,11 +23,11 @@ return {
   },
   -- { "tpope/vim-commentary" },
   {
-    dir = "~/Coding/Langdev/splic/splic.vim/",
+    dir = "~/workspace/splic/splic.vim/",
     event = "BufReadPre *.splic",
   },
   {
-    dir = "~/Coding/Langdev/EXSES/exses.vim/",
+    dir = "~/workspace/exses/exses.vim/",
     event = "BufReadPre *.xes",
   },
   {
