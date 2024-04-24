@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+pactl get-sink-volume 0 | awk '{printf $5}' | sed 's/%//g';
+echo;
+
+pactl subscribe \
+    | grep --line-buffered "Event 'change' on sink " \
+    | while read -r evt; do
+        pactl get-sink-volume 0 | awk '{printf $5}' | sed 's/%//g';
+        echo;
+    done

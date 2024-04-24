@@ -1,9 +1,0 @@
-#!/bin/bash
-
-if [ "$1" = "up" ]; then
-    bspc desktop -f next
-elif [ "$1" = "down" ]; then
-    bspc desktop -f prev
-else
-    notify-send "$0 error"
-fi

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-bspc subscribe node_focus | while read -r event; do
-    id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
-    xprop -id $id | awk '/_NET_WM_NAME/{$1=$2="";print}' | cut -d'"' -f2
-done
