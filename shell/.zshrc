@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="el" # set by `omz`
 
-plugins=(git git-extras zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
+plugins=(git git-extras zsh-syntax-highlighting zsh-autosuggestions zsh-completions dotenv)
 
 source $ZSH/oh-my-zsh.sh
 
