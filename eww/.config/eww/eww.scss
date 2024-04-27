@@ -17,6 +17,11 @@
     border-style: solid;
 }
 
+.left {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .right {
     background: transparent;
     & > * {
