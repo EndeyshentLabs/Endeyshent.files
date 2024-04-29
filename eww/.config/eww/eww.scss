@@ -9,7 +9,9 @@
     color: #C1C1C1;
 }
 
-.center, .left, .right {
+.center,
+.left,
+.right {
     background-color: #000000;
     border-radius: 30px;
     border-width: 2px;
@@ -24,9 +26,19 @@
 
 .right {
     background: transparent;
-    & > * {
+    border-style: none;
+
+    &>* {
         background-color: #000000;
         border-radius: 30px;
+        border-width: 2px;
+        border-color: #C1C1C1;
+        border-style: solid;
+    }
+
+    .battery {
+        margin-left: 3px;
+        margin-right: 3px;
     }
 }
 
@@ -35,13 +47,16 @@
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
     }
+
     .workspace10 {
         border-top-right-radius: 30px;
         border-bottom-right-radius: 30px;
     }
+
     .current {
         background-color: #222222;
     }
+
     .occupied {
         color: #A06666;
     }
