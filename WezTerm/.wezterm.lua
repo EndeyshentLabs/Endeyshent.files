@@ -11,7 +11,6 @@ end
 config.color_scheme = "Pop (base16)"
 config.font = wezterm.font_with_fallback {
     "VictorMono Nerd Font",
-    "VictorMono Nerd Font Mono",
     "Symbols Nerd Font",
 }
 config.font_size = 12
