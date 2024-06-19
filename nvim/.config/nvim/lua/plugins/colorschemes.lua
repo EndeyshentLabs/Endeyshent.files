@@ -12,7 +12,7 @@ return {
     -- lazy = true,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("base16-black-metal")
+      vim.cmd.colorscheme("base16-pop")
     end,
   },
   {
