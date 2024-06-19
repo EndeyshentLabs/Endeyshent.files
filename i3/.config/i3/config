@@ -2,8 +2,6 @@ set $mod Mod4
 
 font pango:VictorMono Nerd Font 9
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
 exec --no-startup-id nm-applet
 
 set $refresh_i3status killall -SIGUSR1 i3status
