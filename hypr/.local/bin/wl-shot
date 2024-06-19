@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+set -o pipefail
+
+if [ "$1" = "area" ]; then
+    grim -g "`slurp -d`" - | tee ~/Pictures/Screenshots/grim_`date '+%s'`.png | wl-copy
+elif [ "$1" = "output" ]; then
+    grim -g "`slurp -o`" - | tee ~/Pictures/Screenshots/grim_`date '+%s'`.png | wl-copy
+fi
