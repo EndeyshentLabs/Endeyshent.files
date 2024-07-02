@@ -2,26 +2,28 @@
     all: unset;
 }
 
+@import 'colors.scss';
+
 .bar {
     font-family: VictorMono Nerd Font;
     font-size: medium;
     background: transparent;
-    color: #C1C1C1;
+    color: $on_surface;
 }
 
 .center,
 .left,
 .right {
-    background-color: #000000;
+    background-color: $surface;
     border-radius: 30px;
     border-width: 2px;
-    border-color: #C1C1C1;
+    border-color: $outline;
     border-style: solid;
 }
 
 .left {
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .right {
@@ -29,10 +31,10 @@
     border-style: none;
 
     &>* {
-        background-color: #000000;
+        background-color: $surface;
         border-radius: 30px;
         border-width: 2px;
-        border-color: #C1C1C1;
+        border-color: $outline;
         border-style: solid;
     }
 
@@ -54,10 +56,10 @@
     }
 
     .current {
-        background-color: #222222;
+        background-color: $secondary_container;
     }
 
     .occupied {
-        color: #A06666;
+        color: $primary;
     }
 }
