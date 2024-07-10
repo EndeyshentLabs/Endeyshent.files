@@ -1,0 +1,13 @@
+set colored-stats On
+set colored-completion-prefix On
+
+set completion-ignore-case On
+set completion-query-items 1000
+
+set echo-control-characters Off
+
+"\e[A": history-search-backward
+"\e[B": history-search-backward
+
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word

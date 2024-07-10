@@ -1,5 +1,0 @@
-if [[ "$TERM" == "alacritty" || "$TERM_PROGRAM" == "__wezterm__" ]]; then
-    cat ~/.cache/wal/sequences
-    clear
-fi
-# vim:set ft=zsh:
