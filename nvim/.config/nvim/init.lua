@@ -56,6 +56,22 @@ now(function() require("mini.starter").setup() end)
 
 now(function() require("mini.statusline").setup() end)
 
+now(function() require("mini.tabline").setup() end)
+
+now(function() require("mini.visits").setup() end)
+
+now(function() require("mini.trailspace").setup() end)
+
+now(function() require("mini.indentscope").setup() end)
+
+now(function() require("mini.git").setup() end)
+
+now(function()
+    require("mini.bufremove").setup()
+    vim.keymap.set("n", "<Leader>Bd", MiniBufremove.delete, { desc = "Delete buffer" })
+    vim.keymap.set("n", "<Leader>Bu", MiniBufremove.unshow, { desc = "Unshow buffer" })
+end)
+
 now(function()
     require("mini.icons").setup()
     MiniIcons.mock_nvim_web_devicons()
@@ -103,14 +119,14 @@ later(function()
             { mode = "x", keys = "g" },
 
             -- Marks
-            { mode = "n", keys = '"' },
+            { mode = "n", keys = "\"" },
             { mode = "n", keys = "`" },
-            { mode = "x", keys = '"' },
+            { mode = "x", keys = "\"" },
             { mode = "x", keys = "`" },
 
             -- Registers
-            { mode = "n", keys = '"' },
-            { mode = "x", keys = '"' },
+            { mode = "n", keys = "\"" },
+            { mode = "x", keys = "\"" },
             { mode = "i", keys = "<C-r>" },
             { mode = "c", keys = "<C-r>" },
 
@@ -123,9 +139,9 @@ later(function()
         },
         clues = {
             -- Custom mappings
-            -- { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
-            { mode = 'n', keys = '<Leader>L', desc = '+LSP' },
-            { mode = 'n', keys = '<Leader>f', desc = '+Find' },
+            { mode = "n", keys = "<Leader>B", desc = "+Buffers" },
+            { mode = "n", keys = "<Leader>L", desc = "+LSP" },
+            { mode = "n", keys = "<Leader>f", desc = "+Find" },
             miniclue.gen_clues.builtin_completion(),
             miniclue.gen_clues.g(),
             miniclue.gen_clues.marks(),
@@ -235,15 +251,20 @@ later(function()
 
     local on_attach_custom = function(client, buf_id)
         vim.bo[buf_id].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-        vim.keymap.set('n', "K", vim.lsp.buf.hover, { desc = "Symbol hover" })
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Symbol hover" })
 
-        local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<Leader>La', vim.lsp.buf.code_action, { desc = "Code action" })
-        vim.keymap.set('n', '<Leader>Lf', vim.lsp.buf.format, { desc = "Format" })
-        vim.keymap.set('n', '<Leader>Lr', vim.lsp.buf.rename, { desc = "Rename" })
-        vim.keymap.set('n', '<Leader>LR', vim.lsp.buf.references, { desc = "References" })
-        vim.keymap.set('n', '<Leader>LS', builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })
-        vim.keymap.set('n', '<Leader>Ld', builtin.diagnostics, { desc = "Workspace diagnostics" })
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+        end
+
+        local builtin = require("telescope.builtin")
+        vim.keymap.set("n", "<Leader>La", vim.lsp.buf.code_action, { desc = "Code action" })
+        vim.keymap.set("n", "<Leader>Lf", vim.lsp.buf.format, { desc = "Format" })
+        vim.keymap.set("n", "<Leader>Lr", vim.lsp.buf.rename, { desc = "Rename" })
+        vim.keymap.set("n", "<Leader>LR", vim.lsp.buf.references, { desc = "References" })
+        vim.keymap.set("n", "<Leader>LS", builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })
+        vim.keymap.set("n", "<Leader>LD", builtin.diagnostics, { desc = "Workspace diagnostics" })
+        vim.keymap.set("n", "<Leader>Ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
     end
 
     for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
@@ -274,15 +295,18 @@ later(function()
 
     require("telescope").setup()
 
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<Leader><Leader>', builtin.find_files, { desc = "Find files" })
-    vim.keymap.set('n', '<Leader>ff', builtin.git_files, { desc = "Find files" })
-    vim.keymap.set('n', '<Leader>fg', builtin.live_grep, { desc = "Live GREP" })
-    vim.keymap.set('n', '<Leader>fh', builtin.help_tags, { desc = "Find vimdoc" })
-    vim.keymap.set('n', '<Leader>fr', builtin.oldfiles, { desc = "Find recently opened files" })
-    vim.keymap.set('n', '<Leader>fM', builtin.man_pages, { desc = "Find man pages" })
-    vim.keymap.set('n', '<Leader>fM', function()
+    local builtin = require("telescope.builtin")
+    vim.keymap.set("n", "<Leader><Leader>", builtin.find_files, { desc = "Find files" })
+    vim.keymap.set("n", "<Leader>ff", builtin.git_files, { desc = "Find files" })
+    vim.keymap.set("n", "<Leader>fg", builtin.live_grep, { desc = "Live GREP" })
+    vim.keymap.set("n", "<Leader>fh", builtin.help_tags, { desc = "Find vimdoc" })
+    vim.keymap.set("n", "<Leader>fr", builtin.oldfiles, { desc = "Find recently opened files" })
+    vim.keymap.set("n", "<Leader>fM", builtin.man_pages, { desc = "Find man pages" })
+    vim.keymap.set("n", "<Leader>fM", function()
         if not MiniFiles.close() then MiniFiles.open() end
     end, { desc = "mini.files" })
-    vim.keymap.set('n', '<Leader>fC', builtin.colorscheme, { desc = "Find Colorschemes" })
+    vim.keymap.set("n", "<Leader>fC", builtin.colorscheme, { desc = "Find Colorschemes" })
 end)
+
+vim.keymap.set("n", "H", "<Cmd>bp<CR>")
+vim.keymap.set("n", "L", "<Cmd>bn<CR>")
