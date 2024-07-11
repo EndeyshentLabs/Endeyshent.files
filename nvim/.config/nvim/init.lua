@@ -68,8 +68,8 @@ now(function() require("mini.git").setup() end)
 
 now(function()
     require("mini.bufremove").setup()
-    vim.keymap.set("n", "<Leader>Bd", MiniBufremove.delete, { desc = "Delete buffer" })
-    vim.keymap.set("n", "<Leader>Bu", MiniBufremove.unshow, { desc = "Unshow buffer" })
+    vim.keymap.set("n", "<Leader>bd", MiniBufremove.delete, { desc = "Delete buffer" })
+    vim.keymap.set("n", "<Leader>bu", MiniBufremove.unshow, { desc = "Unshow buffer" })
 end)
 
 now(function()
@@ -96,7 +96,7 @@ later(function()
         },
         mappings = {
             basic = true,
-            option_toggle_prefix = [[ ]],
+            option_toggle_prefix = [[\]],
             windows = true,
             move_with_alt = true,
         },
@@ -110,6 +110,10 @@ later(function()
             -- Leader triggers
             { mode = "n", keys = "<Leader>" },
             { mode = "x", keys = "<Leader>" },
+
+            -- Option leader (for mini.basics)
+            { mode = "",  keys = "\\" },
+            { mode = "x", keys = "\\" },
 
             -- Built-in completion
             { mode = "i", keys = "<C-x>" },
@@ -139,9 +143,10 @@ later(function()
         },
         clues = {
             -- Custom mappings
-            { mode = "n", keys = "<Leader>B", desc = "+Buffers" },
-            { mode = "n", keys = "<Leader>L", desc = "+LSP" },
+            { mode = "n", keys = "<Leader>b", desc = "+Buffers" },
+            { mode = "n", keys = "<Leader>l", desc = "+LSP" },
             { mode = "n", keys = "<Leader>f", desc = "+Find" },
+            { mode = "n", keys = "<Leader>C", desc = "+Config" },
             miniclue.gen_clues.builtin_completion(),
             miniclue.gen_clues.g(),
             miniclue.gen_clues.marks(),
@@ -152,6 +157,7 @@ later(function()
 
         window = {
             delay = 500,
+            config = { border = "double" }
         },
     })
 end)
@@ -162,7 +168,11 @@ later(function()
     require("mini.completion").setup({
         lsp_completion = {
             source_func = "omnifunc",
-            auto_setup = true,
+            auto_setup = false,
+        },
+        window = {
+            info = { border = "double" },
+            signature = { border = "double" },
         },
     })
 end)
@@ -190,7 +200,19 @@ now(function()
     vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
 end)
 
-later(function() require("mini.files").setup() end)
+later(function()
+    require("mini.files").setup()
+    local minifiles_augroup = vim.api.nvim_create_augroup("ec-mini-files", {})
+    vim.api.nvim_create_autocmd("User", {
+        group = minifiles_augroup,
+        pattern = "MiniFilesWindowOpen",
+        callback = function(args) vim.api.nvim_win_set_config(args.data.win_id, { border = "double" }) end,
+    })
+
+    vim.keymap.set("n", "<Leader>fm", function() if not MiniFiles.close() then MiniFiles.open() end end,
+        { desc = "mini.files" })
+    vim.keymap.set("n", "<Leader>e", MiniFiles.open, { desc = "mini.files" })
+end)
 
 later(function()
     local hipatterns = require("mini.hipatterns")
@@ -214,7 +236,7 @@ later(function() require("mini.splitjoin").setup() end)
 
 later(function() require("mini.surround").setup() end)
 
-require("mini.align").setup()
+later(function() require("mini.align").setup() end)
 
 later(function()
     local ts_spec = {
@@ -243,12 +265,6 @@ later(function()
     require("mason").setup()
     require("mason-lspconfig").setup()
 
-    require("mason-lspconfig").setup_handlers({
-        function(server_name)
-            require("lspconfig")[server_name].setup {}
-        end,
-    })
-
     local on_attach_custom = function(client, buf_id)
         vim.bo[buf_id].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Symbol hover" })
@@ -258,18 +274,33 @@ later(function()
         end
 
         local builtin = require("telescope.builtin")
-        vim.keymap.set("n", "<Leader>La", vim.lsp.buf.code_action, { desc = "Code action" })
-        vim.keymap.set("n", "<Leader>Lf", vim.lsp.buf.format, { desc = "Format" })
-        vim.keymap.set("n", "<Leader>Lr", vim.lsp.buf.rename, { desc = "Rename" })
-        vim.keymap.set("n", "<Leader>LR", vim.lsp.buf.references, { desc = "References" })
-        vim.keymap.set("n", "<Leader>LS", builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })
-        vim.keymap.set("n", "<Leader>LD", builtin.diagnostics, { desc = "Workspace diagnostics" })
-        vim.keymap.set("n", "<Leader>Ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+        vim.keymap.set("n", "<Leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
+        vim.keymap.set("n", "<Leader>lf", vim.lsp.buf.format, { desc = "Format" })
+        vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
+        vim.keymap.set("n", "<Leader>lR", vim.lsp.buf.references, { desc = "References" })
+        vim.keymap.set("n", "<Leader>lS", builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })
+        vim.keymap.set("n", "<Leader>lD", builtin.diagnostics, { desc = "Workspace diagnostics" })
+        vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+        vim.keymap.set("n", "<Leader>lH", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+            { desc = "Toggle inlay hints" })
     end
 
     for _, server in ipairs(require("mason-lspconfig").get_installed_servers()) do
-        require("lspconfig")[server].setup({ on_attach = on_attach_custom })
+        require("lspconfig")[server].setup({
+            on_attach = on_attach_custom,
+        })
     end
+
+    require("lspconfig").lua_ls.setup({
+        on_attach = on_attach_custom,
+        settings = {
+            Lua = {
+                hint = {
+                    enable = true,
+                }
+            }
+        },
+    })
 end)
 
 later(function()
@@ -281,19 +312,20 @@ later(function()
     require("luasnip.loaders.from_vscode").lazy_load()
     local ls = require("luasnip")
 
-    vim.keymap.set({ "i", "s" }, "<C-l>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end,
+    vim.keymap.set({ "i", "s" }, "<Tab>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end,
         { silent = true })
-    vim.keymap.set({ "i", "s" }, "<C-h>", function() if ls.jumpable() then ls.jump(-1) end end, { silent = true })
+    vim.keymap.set({ "i", "s" }, "<S-Tab>", function() if ls.jumpable() then ls.jump(-1) end end, { silent = true })
 end)
 
 later(function()
     add({
         source = "nvim-telescope/telescope.nvim",
         checkout = "0.1.x",
-        depends = { "nvim-lua/plenary.nvim" }
+        depends = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" }
     })
 
     require("telescope").setup()
+    require("telescope").load_extension("ui-select")
 
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<Leader><Leader>", builtin.find_files, { desc = "Find files" })
@@ -302,11 +334,13 @@ later(function()
     vim.keymap.set("n", "<Leader>fh", builtin.help_tags, { desc = "Find vimdoc" })
     vim.keymap.set("n", "<Leader>fr", builtin.oldfiles, { desc = "Find recently opened files" })
     vim.keymap.set("n", "<Leader>fM", builtin.man_pages, { desc = "Find man pages" })
-    vim.keymap.set("n", "<Leader>fM", function()
-        if not MiniFiles.close() then MiniFiles.open() end
-    end, { desc = "mini.files" })
     vim.keymap.set("n", "<Leader>fC", builtin.colorscheme, { desc = "Find Colorschemes" })
 end)
 
 vim.keymap.set("n", "H", "<Cmd>bp<CR>")
 vim.keymap.set("n", "L", "<Cmd>bn<CR>")
+
+vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
+
+vim.keymap.set("n", "<Leader>Ce", "<Cmd>e ~/.config/nvim/init.lua<CR>", { desc = "Edit config" })
+vim.keymap.set("n", "<Leader>Cr", "<Cmd>so ~/.config/nvim/init.lua<CR>", { desc = "Reload config" })
